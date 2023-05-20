@@ -1,15 +1,20 @@
-#include "shell.h"
-
-/**
- * main - Entry point for the simple shell program
- *
- * Return: Always 0
- */
 int main(void)
 {
     char *line;
     char **args;
     int status;
+
+    // Check if input is coming from a pipe
+    if (!isatty(STDIN_FILENO)) {
+        line = read_line();
+        args = split_line(line);
+        status = execute(args);
+
+        free(line);
+        free(args);
+
+        return status;
+    }
 
     while (1)
     {
