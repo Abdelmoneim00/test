@@ -7,7 +7,7 @@ int main(void)
     char **args;
     int status;
 
-    // Check if input is coming from a pipe
+    
     if (!isatty(STDIN_FILENO)) {
         line = read_line();
         args = split_line(line);
